@@ -1,15 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import { makeServer } from "./server";
+import React, { StrictMode } from 'react';
+import * as ReactDOM from 'react-dom/client';
+import App from './App';
+import { makeServer } from './server';
+import './index.css';
+import { Slide, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
-// Call make Server
 makeServer();
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container);
+
+root.render(
+  <StrictMode>
+    <Provider store={store}>
+      <ToastContainer transition={Slide} />
+      <App />
+    </Provider>
+  </StrictMode>
 );
